@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <h1>Super Chat</h1>
+    <hr>
+
+    <form action="/new" method="post">
+        <h2>Share your message!</h2>
+        <p>Input your super name!</p><br>
+        <input type="text" name="userName"/><br>
+        <p>Input your message</p><br>
+        <input type="text" name="message"/><br>
+        <input type="submit" value="Send"/>
+        <hr>
+    </form>
+
+    <div class="chat">
+        <tr th:each="chat : ${chat}">
+            <td th:text="${chat.date}"></td>
+            <td th:text="${chat.userName}"></td>
+            <td th:text="${chat.message}"></td>
+            <br>
+        </tr>
+    </div>
+</body>
+</html>
