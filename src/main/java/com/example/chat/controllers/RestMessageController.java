@@ -1,30 +1,26 @@
 package com.example.chat.controllers;
 
-
 import com.example.chat.models.Message;
 import com.example.chat.services.MessageService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequiredArgsConstructor
-public class MessageController {
+@RestController
+@AllArgsConstructor
+public class RestMessageController {
     private final MessageService messageService;
 
-    @GetMapping("/")
-    public String chat(Model model) {
-        model.addAttribute("chat", messageService.listMessages());
-        return "chat";
+    @GetMapping("/api/v1")
+    public String chatJSON(Model model) {
+        return messageService.listMessages().toString();
     }
 
-    @PostMapping("/new")
+    @PostMapping("/api/v1/new")
     public String createMessage(Message message) {
         messageService.saveMessage(message);
-        return "redirect:/";
+        return "saved";
     }
-
-
 }
