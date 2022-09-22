@@ -7,6 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,9 +22,12 @@ public class RestMessageController {
     private final MessageService messageService;
 
     @GetMapping("/api/v1/messages")
-    public String chatJSON(Model model) throws JsonProcessingException {
+    public ResponseEntity<String> chatJSON(Model model) throws JsonProcessingException {
         final ObjectMapper mapper = JsonMapper.builder().addModules(new JavaTimeModule()).build();
-        return mapper.writeValueAsString(messageService.listMessages());
+        String json = mapper.writeValueAsString(messageService.listMessages());
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<String>(json, responseHeaders, HttpStatus.CREATED);
     }
 
     @PostMapping("/api/v1/messages")
