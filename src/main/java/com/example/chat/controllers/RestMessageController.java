@@ -3,7 +3,6 @@ package com.example.chat.controllers;
 import com.example.chat.models.Message;
 import com.example.chat.services.MessageService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AllArgsConstructor;
@@ -23,8 +22,8 @@ public class RestMessageController {
 
     @GetMapping("/api/v1/messages")
     public ResponseEntity<String> chatJSON(Model model) throws JsonProcessingException {
-        final ObjectMapper mapper = JsonMapper.builder().addModules(new JavaTimeModule()).build();
-        String json = mapper.writeValueAsString(messageService.listMessages());
+//        final ObjectMapper mapper = JsonMapper.builder().addModules(new JavaTimeModule()).build();
+        String json = JsonMapper.builder().addModules(new JavaTimeModule()).build().writeValueAsString(messageService.listMessages());
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(json, responseHeaders, HttpStatus.CREATED);
