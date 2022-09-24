@@ -27,7 +27,7 @@ public class RestMessageController {
         String json = mapper.writeValueAsString(messageService.listMessages());
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<String>(json, responseHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>(json, responseHeaders, HttpStatus.CREATED);
     }
 
     @PostMapping("/api/v1/messages")

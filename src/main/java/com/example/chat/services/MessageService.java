@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MessageService {
     private List<Message> chat = new ArrayList<>();
-//    private long ID = 0;
 
     {
-        chat.add(new Message("user", "test message", LocalDateTime.now()));
-        chat.add(new Message("userNew", "test message kek", LocalDateTime.now()));
+        chat.add(new Message(UUID.randomUUID(), "user", "test message", LocalDateTime.now()));
+        chat.add(new Message(UUID.randomUUID(), "userNew", "test message kek", LocalDateTime.now()));
     }
 
     public List<Message> listMessages() {
@@ -22,7 +22,7 @@ public class MessageService {
     }
 
     public void saveMessage(Message messages) {
-//        messages.setId(++ID);
+        messages.setId(UUID.randomUUID());
         messages.setDate(LocalDateTime.now());
         this.chat.add(messages);
     }
