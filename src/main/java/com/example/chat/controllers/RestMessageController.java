@@ -31,8 +31,10 @@ public class RestMessageController {
     }
 
     @PostMapping
-    public ResponseEntity<String> postChat(@RequestParam @NotBlank String userName, @RequestParam @NotBlank String message) {
-        messageService.save(userName, message);
-        return ResponseEntity.ok("valid");
+    public ResponseEntity<String> postChat(@RequestParam @NotBlank String userName, @RequestParam @NotBlank String message) throws JsonProcessingException {
+        String newMessage = JsonMapper.builder().addModules(new JavaTimeModule()).build().writeValueAsString(messageService.save(userName, message));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<>(newMessage, responseHeaders, HttpStatus.CREATED);
     }
 }

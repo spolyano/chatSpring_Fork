@@ -16,6 +16,7 @@ public class Message {
     private String userName;
     @NotBlank
     private String message;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss z", timezone="GMT")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss z", timezone = "GMT")
     private OffsetDateTime date;
+    private String type;
 }
