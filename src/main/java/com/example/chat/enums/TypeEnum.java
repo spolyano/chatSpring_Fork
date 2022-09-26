@@ -1,11 +1,11 @@
 package com.example.chat.enums;
 
-public enum Types {
+public enum TypeEnum {
     MESSAGE("Message");
 
     final public String type;
 
-    Types(String type) {
+    TypeEnum(String type) {
         this.type = type;
     }
 
