@@ -5,7 +5,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ErrorsService {
-    public Errors empty(String emptyFields) {
-        return new Errors(400, emptyFields, emptyFields);
+    public Errors empty(String error) {
+        return new Errors(400, error, error);
+    }
+
+    public Errors serverError(String error) {
+        return new Errors(500, error, error);
     }
 }
