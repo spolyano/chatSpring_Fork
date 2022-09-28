@@ -5,20 +5,20 @@ import com.example.chat.models.Message;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
 public class MessageService {
-    private final List<Message> chat = new ArrayList<>();
+    private final Set<Message> chat = new HashSet<>();
 
     {
         chat.add(new Message(UUID.randomUUID(), "user", "test message", OffsetDateTime.now(), TypeEnum.MESSAGE.type));
         chat.add(new Message(UUID.randomUUID(), "userNew", "test message kek", OffsetDateTime.now(), TypeEnum.MESSAGE.type));
     }
 
-    public List<Message> listMessages() {
+    public Set<Message> listMessages() {
         return chat;
     }
 
