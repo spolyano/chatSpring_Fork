@@ -54,8 +54,7 @@ paths:
           content:
             application/json;charset=utf-8:
               schema:
-                items:
-                  $ref: '#/components/schemas/Message'
+                $ref: '#/components/schemas/Message'
         '400':
           description: 'Bad Request'
           content:
