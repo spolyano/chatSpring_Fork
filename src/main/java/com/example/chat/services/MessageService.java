@@ -5,13 +5,13 @@ import com.example.chat.models.Message;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Service
 public class MessageService {
-    private final Set<Message> chat = new HashSet<>();
+    private final Set<Message> chat = new LinkedHashSet<>();
 
     {
         chat.add(new Message(UUID.randomUUID(), "user", "test message", OffsetDateTime.now(), TypeEnum.MESSAGE.type));
